@@ -1,0 +1,102 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Inter:wght@300;400;600&display=swap');
+
+@theme {
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  --color-primary: #000000;
+  --color-accent: #ff3131;
+}
+
+@keyframes shine {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.animate-shine {
+  animation: shine 1.5s ease-in-out infinite;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-black font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .will-change-composite {
+    will-change: transform, opacity;
+  }
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  .text-shadow-hard {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+}
+
+@layer components {
+  .scroll-indicator-loop {
+    animation: scroll-loop 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-loop {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 1;
+    }
+  }
+
+  .border-thick {
+    border-width: 3px;
+    @apply border-black;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(180deg, #000 0%, #111 100%);
+  }
+
+  .custom-scroll-mask {
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+
+  .nav-active-blue {
+    color: #0066CC;
+    transition: all 0.3s ease;
+  }
+
+  .ken-burns {
+    animation: ken-burns 20s ease-out infinite alternate;
+  }
+
+  @keyframes ken-burns {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.15);
+    }
+  }
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease-out;
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
